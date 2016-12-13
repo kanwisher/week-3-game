@@ -1,6 +1,7 @@
 body {
 	background: url("../images/jungle.jpg") no-repeat;
 	font-family: 'Quattrocento', serif, arial;
+	background-size: cover;
 
 
 }
