@@ -13,6 +13,7 @@ var keyLock = false;
 
 generatePuzzle(); //sets up puzzle on initial page load
 updateStats(); //sets up stats on initial page load
+document.getElementById("message").innerHTML = "Press any key to get started";
 
 
 
