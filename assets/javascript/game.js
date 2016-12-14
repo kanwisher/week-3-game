@@ -56,21 +56,23 @@ document.onkeyup = function() { //if a key is pressed
         }
 
         if (underscoreArray.indexOf("_") == -1) { //Run if there aren't any underscores remaining in the array. If there aren't any underscores left, then the puzzle has been solved
-            ++wins;
-            document.getElementById("wins").innerHTML = "Wins: " + wins;
+            
             keyLock = true;
             message = "You win!"
             document.getElementById("message").innerHTML = message;
+            ++wins;
+            document.getElementById("wins").innerHTML = "Wins: " + wins;
             
 
         }
 
         if (lives == 0) { //Run if guesses run out
-            ++losses;
-            document.getElementById("losses").innerHTML = "Losses: " + losses;
+            
             keyLock = true;
             message = "Game Over"
             document.getElementById("message").innerHTML = message;
+            ++losses;
+            document.getElementById("losses").innerHTML = "Losses: " + losses;
             
 
         }
