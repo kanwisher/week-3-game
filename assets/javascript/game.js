@@ -60,6 +60,7 @@ document.onkeyup = function() { //if a key is pressed
             keyLock = true;
             message = "You win!"
             document.getElementById("message").innerHTML = message;
+            updateStats();
 
         }
 
@@ -68,6 +69,7 @@ document.onkeyup = function() { //if a key is pressed
             keyLock = true;
             message = "Game Over"
             document.getElementById("message").innerHTML = message;
+            updateStats();
 
         }
 
