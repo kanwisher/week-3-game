@@ -5,7 +5,7 @@ alphabet           : 'abcdefghijklmnopqrstuvwxyz'.split(''), //Alphabet array
 lives              : 10, //number of guesses remaining
 wordArray          : ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"], //possible answer choices the computer can pick for Hangman
 computerWordChoice : wordArray[Math.floor(Math.random() * wordArray.length)], //computer picks a random  word from the word bank//
-underscoreArray    : [], //I have a function places an underscores in this empty array for each letter in the word the computer selected 
+underscoreArray    : [], //I have a function that places an underscores in this empty array for each letter in the word the computer selected 
 wins               : 0,
 losses             : 0,
 keyLock            : false
@@ -28,26 +28,26 @@ document.onkeyup = function() { //if a key is pressed
 
 
 
-    if (keyLock === true) {
+    if (hangMan.keyLock === true) {
 
 
 
 
-    } else if (alphabet.indexOf(userLetterChoice) === -1) { //Run If it's not a valid letter in the alphabet
+    } else if (hangMan.alphabet.indexOf(userLetterChoice) === -1) { //Run If it's not a valid letter in the alphabet
         message = "You've entered an invalid character";
         document.getElementById("message").innerHTML = message;
 
 
-    } else if (usedLetters.indexOf(userLetterChoice) != -1 || underscoreArray.indexOf(userLetterChoice) != -1) { //Run If the letter has already been guessed incorrectly or correctly
-        message = ("You've already used that letter");
+    } else if (hangMan.usedLetters.indexOf(userLetterChoice) > -1 || hangMan.underscoreArray.indexOf(userLetterChoice) > -1) { //Run If the letter has already been guessed incorrectly or correctly
+        message = "You've already used that letter";
         document.getElementById("message").innerHTML = message;
 
     } else { //Run if all above statemetents are false
 
-        for (i = 0; i < computerWordChoice.length; i++) {
+        for (i = 0; i < hangMan.computerWordChoice.length; i++) {
 
-            if (computerWordChoice.charAt(i) === userLetterChoice) { //runs through each letter of the word the computer chose, if any letter in the word  is the same as the guessed letter
-                underscoreArray[i] = userLetterChoice; //then change in the underScore array from an underscore to the guessed letter, like a replacement ( computerWordChoice.charAt(i) will always be the answer to underscoreArray[i])
+            if (hangMan.computerWordChoice.charAt(i) === userLetterChoice) { //runs through each letter of the word the computer chose, if any letter in the word  is the same as the guessed letter
+                underscoreArray[i] = userLetterChoice; //then change in the underScore array from an underscore to the guessed letter, like a replacement ( computerWordChoice.charAt(i) will always be in relation to the same position in underscoreArray[i])
                 updateStats(); //update the stats so we can see the changes
             }
         }
