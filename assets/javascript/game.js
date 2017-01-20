@@ -19,6 +19,7 @@ updateStats(); //sets up stats on initial page load
 updateMessage("Press any key to get started");
 
 
+    
 
 document.onkeyup = function() { //if a key is pressed
     var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase(); //turn the key into a string and make it lowercase
@@ -79,16 +80,6 @@ document.onkeyup = function() { //if a key is pressed
 };
 
 
-function resetGame() {
-    hangMan.usedLetters = [];
-    hangMan.underscoreArray = [];
-    hangMan.underscoreString = "";
-    hangMan.keyLock = false; //unlocks keyboard
-    hangMan.lives = 10;
-    hangMan.generatePuzzle();
-    updateStats();
-
-};
 
 function generatePuzzle() {
     hangMan.computerWordChoice = hangMan.wordArray[Math.floor(Math.random() * hangMan.wordArray.length)]; //computer selects a random word
@@ -111,3 +102,14 @@ function updateStats() {
 function updateMessage(message){
     document.getElementById("message").innerHTML = message;
 };
+
+//reset button action
+document.getElementById("resetbutton").addEventListener("click", function(){
+    hangMan.usedLetters = [];
+    hangMan.underscoreArray = [];
+    hangMan.underscoreString = "";
+    hangMan.keyLock = false; //unlocks keyboard
+    hangMan.lives = 10;
+    hangMan.generatePuzzle();
+    updateStats();
+});
