@@ -16,14 +16,13 @@ keyLock            : false
 
 generatePuzzle(); //sets up puzzle on initial page load
 updateStats(); //sets up stats on initial page load
-document.getElementById("message").innerHTML = "Press any key to get started";
+updateMessage("Press any key to get started");
 
 
 
 document.onkeyup = function() { //if a key is pressed
     var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase(); //turn the key into a string and make it lowercase
-    var message = "";
-    document.getElementById("message").innerHTML = message;
+    updateMessage("");
 
 
 
@@ -34,13 +33,11 @@ document.onkeyup = function() { //if a key is pressed
 
 
     } else if (hangMan.alphabet.indexOf(userLetterChoice) === -1) { //Run If it's not a valid letter in the alphabet
-        message = "You've entered an invalid character";
-        document.getElementById("message").innerHTML = message;
+        updateMessage("You've entered an invalid character");
 
 
     } else if (hangMan.usedLetters.indexOf(userLetterChoice) > -1 || hangMan.underscoreArray.indexOf(userLetterChoice) > -1) { //Run If the letter has already been guessed incorrectly or correctly
-        message = "You've already used that letter";
-        document.getElementById("message").innerHTML = message;
+        updateMessage("You've already used that letter");
 
     } else { //Run if all above statemetents are false
 
@@ -61,8 +58,7 @@ document.onkeyup = function() { //if a key is pressed
         if (hangMan.underscoreArray.indexOf("_") === -1) { //Run if there aren't any underscores remaining in the array. If there aren't any underscores left, then the puzzle has been solved
             
             hangMan.keyLock = true;
-            message = "You win!"
-            document.getElementById("message").innerHTML = message;
+            updateMessage("You win!");
             ++hangMan.wins;
             document.getElementById("wins").innerHTML = "Wins: " + hangMan.wins;
             
@@ -72,8 +68,7 @@ document.onkeyup = function() { //if a key is pressed
         if (hangMan.lives === 0) { //Run if guesses run out
             
             hangMan.keyLock = true;
-            message = "Game Over"
-            document.getElementById("message").innerHTML = message;
+            updateMessage("Game Over");
             ++hangMan.losses;
             document.getElementById("losses").innerHTML = "Losses: " + hangMan.losses;
             
@@ -111,4 +106,8 @@ function updateStats() {
     document.getElementById("wins").innerHTML = "Wins: " + hangMan.wins;
     document.getElementById("losses").innerHTML = "Losses: " + hangMan.losses;
 
+};
+
+function updateMessage(message){
+    document.getElementById("message").innerHTML = message;
 };
