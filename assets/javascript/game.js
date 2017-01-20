@@ -4,7 +4,7 @@ usedLetters        : [], //empty array to be "pushed" to fill, will only include
 alphabet           : 'abcdefghijklmnopqrstuvwxyz'.split(''), //Alphabet array
 lives              : 10, //number of guesses remaining
 wordArray          : ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"], //possible answer choices the computer can pick for Hangman
-computerWordChoice : wordArray[Math.floor(Math.random() * wordArray.length)], //computer picks a random  word from the word bank//
+computerWordChoice : hangMan.wordArray[Math.floor(Math.random() * hangMan.wordArray.length)], //computer picks a random  word from the word bank//
 underscoreArray    : [], //I have a function that places an underscores in this empty array for each letter in the word the computer selected 
 wins               : 0,
 losses             : 0,
