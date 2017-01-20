@@ -1,12 +1,15 @@
-var usedLetters = []; //empty array to be "pushed" to fill, will only include incorrect guesses
-var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split(''); //Alphabet array
-var lives = 10; //number of guesses remaining
-var wordArray = ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"]; //possible answer choices the computer can pick for Hangman
-var computerWordChoice = wordArray[Math.floor(Math.random() * wordArray.length)]; //computer picks a random  word from the word bank//
-var underscoreArray = []; //I have a function places an underscores in this empty array for each letter in the word the computer selected 
-var wins = 0;
-var losses = 0;
-var keyLock = false;
+var hangMan = {
+
+usedLetters        : [], //empty array to be "pushed" to fill, will only include incorrect guesses
+alphabet           : 'abcdefghijklmnopqrstuvwxyz'.split(''), //Alphabet array
+lives              : 10, //number of guesses remaining
+wordArray          : ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"], //possible answer choices the computer can pick for Hangman
+computerWordChoice : wordArray[Math.floor(Math.random() * wordArray.length)], //computer picks a random  word from the word bank//
+underscoreArray    : [], //I have a function places an underscores in this empty array for each letter in the word the computer selected 
+wins               : 0,
+losses             : 0,
+keyLock            : false
+}
 
 
 
