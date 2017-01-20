@@ -1,16 +1,16 @@
-var wordArray          = ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"]; //possible answer choices the computer can pick for Hangman
+var wordArray = ["elephant", "tapir", "ocelot", "jaguar", "python", "termite", "piranha", "anaconda", "parrot", "gorilla", "bonobo", "tiger", "leopard", "cobra", "cougar", "capybara", "macaw"]; //possible answer choices the computer can pick for Hangman
 
 
 var hangMan = {
 
-usedLetters        : [], //empty array to be "pushed" to fill, will only include incorrect guesses
-alphabet           : 'abcdefghijklmnopqrstuvwxyz'.split(''), //Alphabet array
-lives              : 10, //number of guesses remaining
-computerWordChoice : wordArray[Math.floor(Math.random() * wordArray.length)], //computer picks a random  word from the word bank//
-underscoreArray    : [], //I have a function that places an underscores in this empty array for each letter in the word the computer selected 
-wins               : 0,
-losses             : 0,
-keyLock            : false
+    usedLetters: [], //empty array to be "pushed" to fill, will only include incorrect guesses
+    alphabet: 'abcdefghijklmnopqrstuvwxyz'.split(''), //Alphabet array
+    lives: 10, //number of guesses remaining
+    computerWordChoice: wordArray[Math.floor(Math.random() * wordArray.length)], //computer picks a random  word from the word bank//
+    underscoreArray: [], //I have a function that places an underscores in this empty array for each letter in the word the computer selected 
+    wins: 0,
+    losses: 0,
+    keyLock: false
 }
 
 
@@ -21,80 +21,88 @@ updateStats(); //sets up stats on initial page load
 updateMessage("Press any key to get started");
 
 
-    
+
 
 
 
 
 document.onkeyup = function() { //if a key is pressed
-        var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase(); //turn the key into a string and make it lowercase
-        
-        if (hangMan.keyLock === true) {
 
-            console.log("keyboard is locked, press New Game to play again");
+    var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase(); //turn the key into a string and make it lowercase
 
-        } else {
+    if (hangMan.keyLock === true) {
 
-            updateMessage("");
+        console.log("keyboard is locked, press New Game to play again");
 
-            if (hangMan.alphabet.indexOf(userLetterChoice) === -1) { //Run If it's not a valid letter in the alphabet
-                updateMessage("You've entered an invalid character");
+    } else {
+
+        updateMessage("");
+
+        if (hangMan.alphabet.indexOf(userLetterChoice) === -1) { //Run If it's not a valid letter in the alphabet
+
+            updateMessage("You've entered an invalid character");
 
 
-            } else if (hangMan.usedLetters.indexOf(userLetterChoice) > -1 || hangMan.underscoreArray.indexOf(userLetterChoice) > -1) { //Run If the letter has already been guessed incorrectly or correctly
-                updateMessage("You've already used that letter");
+        } else if (hangMan.usedLetters.indexOf(userLetterChoice) > -1 || hangMan.underscoreArray.indexOf(userLetterChoice) > -1) { //Run If the letter has already been guessed incorrectly or correctly
 
-            } else { //Run if all above statemetents are false
+            updateMessage("You've already used that letter");
 
-                for (i = 0; i < hangMan.computerWordChoice.length; i++) {
+        } else { //Run if all above statemetents are false
 
-                    if (hangMan.computerWordChoice.charAt(i) === userLetterChoice) { //runs through each letter of the word the computer chose, if any letter in the word  is the same as the guessed letter
-                        hangMan.underscoreArray[i] = userLetterChoice; //then change in the underScore array from an underscore to the guessed letter, like a replacement ( computerWordChoice.charAt(i) will always be in relation to the same position in underscoreArray[i])
-                        updateStats(); //update the stats so we can see the changes
-                    }
-                }
+            for (i = 0; i < hangMan.computerWordChoice.length; i++) {
 
-                if (hangMan.underscoreArray.indexOf(userLetterChoice) === -1) { // Part of the final else statement. Only runs if it's an incorrect guess that hasn't been used before
-                    hangMan.usedLetters.push(userLetterChoice); //Push the wrong letter guess into the UsedLetters array, we can test now if these have already been guessed if they appear in the array on future guesses
-                    hangMan.lives -= 1; //take away a guess for being wrong
-                    updateStats(); //update stats so we can see the changes
-                }
+                if (hangMan.computerWordChoice.charAt(i) === userLetterChoice) { //runs through each letter of the word the computer chose, if any letter in the word  is the same as the guessed letter
 
-                if (hangMan.underscoreArray.indexOf("_") === -1) { //Run if there aren't any underscores remaining in the array. If there aren't any underscores left, then the puzzle has been solved
-                    
-                    hangMan.keyLock = true;
-                    updateMessage("You win!");
-                    ++hangMan.wins;
-                    document.getElementById("wins").innerHTML = "Wins: " + hangMan.wins;
-                    
+                    hangMan.underscoreArray[i] = userLetterChoice; //then change in the underScore array from an underscore to the guessed letter, like a replacement ( computerWordChoice.charAt(i) will always be in relation to the same position in underscoreArray[i])
+                    updateStats(); //update the stats so we can see the changes
 
                 }
+            }
 
-                if (hangMan.lives === 0) { //Run if guesses run out
-                    
-                    hangMan.keyLock = true;
-                    updateMessage("Game Over, the word was '" + hangMan.computerWordChoice + "'");
-                    ++hangMan.losses;
-                    document.getElementById("losses").innerHTML = "Losses: " + hangMan.losses;
-                    
+            if (hangMan.underscoreArray.indexOf(userLetterChoice) === -1) { // Part of the final else statement. Only runs if it's an incorrect guess that hasn't been used before
 
-                }
+                hangMan.usedLetters.push(userLetterChoice); //Push the wrong letter guess into the UsedLetters array, we can test now if these have already been guessed if they appear in the array on future guesses
+                hangMan.lives -= 1; //take away a guess for being wrong
+                updateStats(); //update stats so we can see the changes
 
             }
+
+            if (hangMan.underscoreArray.indexOf("_") === -1) { //Run if there aren't any underscores remaining in the array. If there aren't any underscores left, then the puzzle has been solved
+
+                hangMan.keyLock = true;
+                updateMessage("You win!");
+                ++hangMan.wins;
+                document.getElementById("wins").innerHTML = "Wins: " + hangMan.wins;
+
+            }
+
+            if (hangMan.lives === 0) { //Run if guesses run out
+
+                hangMan.keyLock = true;
+                updateMessage("Game Over, the word was '" + hangMan.computerWordChoice + "'");
+                ++hangMan.losses;
+                document.getElementById("losses").innerHTML = "Losses: " + hangMan.losses;
+
+            }
+
         }
-    };
+    }
+};
 
 
 
 function generatePuzzle() {
+
     hangMan.computerWordChoice = wordArray[Math.floor(Math.random() * wordArray.length)]; //computer selects a random word
     for (i = 0; i < hangMan.computerWordChoice.length; i++) { //creates array of underscores so I can pull their index to match with correct letters
+
         hangMan.underscoreArray.push("_");
     }
 };
 
 
 function updateStats() {
+
     var underscoreString = hangMan.underscoreArray.join(" "); //Sets my array as a string and adds a space inbetween each item
     document.getElementById("underScores").innerHTML = underscoreString;
     document.getElementById("usedLetters").innerHTML = "Guessed Letters: " + hangMan.usedLetters.join(" ");
@@ -104,12 +112,14 @@ function updateStats() {
 
 };
 
-function updateMessage(message){
+function updateMessage(message) {
+
     document.getElementById("message").innerHTML = message;
 };
 
 //reset button action
-document.getElementById("resetbutton").addEventListener("click", function(){
+document.getElementById("resetbutton").addEventListener("click", function() {
+    
     hangMan.usedLetters = [];
     hangMan.underscoreArray = [];
     hangMan.underscoreString = "";
